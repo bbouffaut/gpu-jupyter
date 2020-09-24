@@ -2,7 +2,7 @@
 
 # Use NVIDIA CUDA as base image and run the same installation as in the other packages.
 # The version of cudatoolkit must match those of the base image, see Dockerfile.pytorch
-FROM nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04
+FROM nvidia/cuda:9.0-cudnn7-runtime
 LABEL authors="Christoph Schranz <christoph.schranz@salzburgresearch.at>, Mathematical Michael <consistentbayes@gmail.com>"
 # This is a concatenated Dockerfile, the maintainers of subsequent sections may vary.
 RUN chmod 1777 /tmp && chmod 1777 /var/tmp
@@ -164,6 +164,9 @@ WORKDIR $HOME
 LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 
 USER root
+
+# install texlive ppa repo
+RUN add-apt-repository ppa:jonathonf/texlive
 
 # Install all OS dependencies for fully functional notebook server
 RUN apt-get update && apt-get install -yq --no-install-recommends \
@@ -396,7 +399,7 @@ RUN conda install --quiet --yes \
 RUN conda install --quiet --yes \
      pytorch \ 
      torchvision \
-     cudatoolkit=10.1 -c pytorch
+     cudatoolkit=9.0 -c pytorch
 #    pip install torch_nightly -f https://download.pytorch.org/whl/nightly/cu90/torch_nightly.html && \
 
 # Clean installation
