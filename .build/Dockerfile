@@ -166,7 +166,7 @@ LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 USER root
 
 # install add-apt-repository tool
-RUN apt-get update && apt-get install -yq software-properties-common
+RUN apt-get update && apt-get install -yq --no-install-recommends software-properties-common
 
 # install texlive ppa repo
 RUN add-apt-repository ppa:jonathonf/texlive
